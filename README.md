@@ -42,9 +42,45 @@ Step 2: Understanding Project Structure
 8 │ ├── test
  9 │ │ ├── java
 10 │ │ └── resources
-  Build and Run a Simple Java ApplicaƟon
+Build and Run a Simple Java ApplicaƟon
 Step 1: Modify build.gradle (Groovy DSL)
 Step 2: Build and Run the Project In IntelliJ IDEA, open the
 Gradle tool window (View → Tool Windows → Gradle). Click
 Tasks > applicaƟon > run . Or run from terminal:
 > gradle run 
+
+
+
+
+ import org.openqa.selenium.WebDriver;
+ import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+  import org.testng.annotations.AfterTest;
+  import org.testng.annotations.BeforeTest;
+ import org.testng.annotations.Test;
+ import static org.testng.Assert.assertTrue;
+  public class WebpageTest {
+
+ private static WebDriver driver;
+
+ @BeforeTest
+ public void openBrowser() throws InterruptedException {
+ driver = new ChromeDriver();
+ driver.manage().window().maximize();
+ }
+ @Test
+ public void titleValidationTest(){
+ }
+ Thread.sleep(2000);
+ driver.get("https://sauravsarkar-codersarcade.github.io/CA-MVN/"); // "Note: You should
+ use your GITHUB-URL here...!!!"
+ String actualTitle = driver.getTitle();
+ String expectedTitle = "Tripillar Solutions";
+ Assert.assertEquals(actualTitle, expectedTitle);
+ assertTrue(true, "Title should contain 'Tripillar'");
+ @AfterTest
+ public void closeBrowser() throws InterruptedException {
+ Thread.sleep(1000);
+ driver.quit();
+ }
+ } 
